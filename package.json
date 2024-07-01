@@ -13,6 +13,8 @@
     "@craftjs/core": "^0.2.8",
     "@mantine/core": "^7.11.0",
     "@mantine/hooks": "^7.11.0",
+    "@tabler/core": "^1.0.0-beta20",
+    "@tabler/icons-react": "^3.7.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
@@ -31,6 +33,7 @@
     "postcss-preset-mantine": "^1.15.0",
     "postcss-simple-vars": "^7.0.1",
     "prettier": "3.3.2",
+    "sass": "^1.77.6",
     "typescript": "^5.2.2",
     "vite": "^5.3.1"
   }

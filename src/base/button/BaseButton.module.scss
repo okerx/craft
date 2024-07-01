@@ -1,0 +1,13 @@
+@import "../common";
+
+.button {
+  -webkit-appearance: none;
+  text-align: inherit;
+  cursor: pointer;
+  border: none;
+  font: inherit;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+}
