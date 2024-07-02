@@ -13,7 +13,7 @@ export const TextBlock: WithCraft<React.FC<PropsWithChildren<BaseTextProps>>, Ba
     isSelected: state.events.selected.has(id),
   }));
 
-  return <BaseText ref={(ref) => ref && connect(drag(ref))} {...props} selected={isSelected} />;
+  return <BaseText ref={(ref) => ref && connect(drag(ref))} {...props} selected={isSelected} data-node-id={id} />;
 };
 
 export const TextSettings = () => {
@@ -52,6 +52,7 @@ export const TextSettings = () => {
 };
 
 TextBlock.craft = {
+  displayName: 'Text',
   props: { text: 'Text', fontSize: '16px', fontWeight: 'normal' },
   related: { settings: TextSettings },
 };

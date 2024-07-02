@@ -11,7 +11,7 @@ export const ButtonBlock: WithCraft<React.FC<BaseButtonProps>, BaseButtonProps> 
   } = useNode();
   const { isSelected } = useEditor((state) => ({ isSelected: state.events.selected.has(id) }));
 
-  return <BaseButton ref={(ref) => ref && connect(drag(ref))} {...props} selected={isSelected} />;
+  return <BaseButton ref={(ref) => ref && connect(drag(ref))} {...props} selected={isSelected} data-node-id={id} />;
 };
 
 const ButtonBlockSettings = () => {
@@ -72,6 +72,7 @@ const ButtonBlockSettings = () => {
 };
 
 ButtonBlock.craft = {
+  displayName: 'Button',
   props: {
     text: 'Button',
     children: 'Button',

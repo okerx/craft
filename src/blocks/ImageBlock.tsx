@@ -11,7 +11,7 @@ export const ImageBlock: WithCraft<React.FC<BaseImageProps>, BaseImageProps> = (
   } = useNode();
   const { isSelected } = useEditor((state) => ({ isSelected: state.events.selected.has(id) }));
 
-  return <BaseImage ref={(ref) => ref && connect(drag(ref))} {...props} selected={isSelected} />;
+  return <BaseImage ref={(ref) => ref && connect(drag(ref))} {...props} selected={isSelected} data-node-id={id} />;
 };
 
 const ImageBlockSettings = () => {
@@ -59,6 +59,7 @@ const ImageBlockSettings = () => {
 };
 
 ImageBlock.craft = {
+  displayName: 'Image',
   props: {
     src: 'https://placehold.co/600x400/a1a1a1/31343C',
     alt: 'Image',

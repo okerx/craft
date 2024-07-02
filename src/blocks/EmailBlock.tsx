@@ -11,7 +11,7 @@ export const EmailBlock: WithCraft<React.FC<BaseEmailProps>, BaseEmailProps> = (
   } = useNode();
   const { isSelected } = useEditor((state) => ({ isSelected: state.events.selected.has(id) }));
 
-  return <BaseEmail ref={(ref) => ref && connect(drag(ref))} {...props} selected={isSelected} />;
+  return <BaseEmail ref={(ref) => ref && connect(drag(ref))} {...props} selected={isSelected} data-node-id={id} />;
 };
 
 export const EmailBlockSettings = () => {
@@ -65,6 +65,7 @@ export const EmailBlockSettings = () => {
 };
 
 EmailBlock.craft = {
+  displayName: 'Email',
   props: {
     placeholder: 'Email',
     borderRadius: '4px',

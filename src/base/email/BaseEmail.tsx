@@ -3,7 +3,7 @@ import { BaseInput, BaseInputProps } from '../input';
 
 export type BaseEmailProps = Omit<BaseInputProps, 'icon'> & React.InputHTMLAttributes<HTMLInputElement>;
 
-export const BaseEmail = forwardRef<HTMLInputElement, BaseEmailProps>(({ ...props }, ref) => {
+export const BaseEmail = forwardRef<HTMLDivElement, BaseEmailProps>(({ ...props }, ref) => {
   return <BaseInput ref={ref} {...props} icon="📧" />;
 });
 

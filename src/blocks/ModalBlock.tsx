@@ -13,7 +13,15 @@ export const ModalBlock: WithCraft<React.FC<BaseModalProps>, BaseModalProps> = (
 
   const minHeight = props.children ? undefined : 30;
 
-  return <BaseModal style={{ minHeight }} ref={(ref) => ref && connect(drag(ref))} {...props} selected={isSelected} />;
+  return (
+    <BaseModal
+      style={{ minHeight }}
+      ref={(ref) => ref && connect(drag(ref))}
+      {...props}
+      selected={isSelected}
+      data-node-id={id}
+    />
+  );
 };
 
 export const ModalBlockSettings = () => {
@@ -116,6 +124,8 @@ export const ModalBlockSettings = () => {
 };
 
 ModalBlock.craft = {
+  displayName: 'Modal',
+  custom: { isEssential: true },
   props: {
     padding: '10px',
     borderRadius: '4px',

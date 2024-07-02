@@ -14,19 +14,21 @@ import {
 import { Toolbar } from './toolbar';
 import { BlockSettings } from './toolbox/BlockSettings.tsx';
 import { Blocks } from './toolbox/Blocks.tsx';
+import { NodeRender } from './render';
 
 export default function App() {
   return (
     <Editor
+      onRender={NodeRender}
       resolver={{
-        Overlay: OverlayBlock,
-        Modal: ModalBlock,
-        Container: ContainerBlock,
-        Image: ImageBlock,
-        Text: TextBlock,
-        Email: EmailBlock,
-        Button: ButtonBlock,
-        Phone: PhoneBlock,
+        OverlayBlock,
+        ModalBlock,
+        ContainerBlock,
+        ImageBlock,
+        TextBlock,
+        EmailBlock,
+        ButtonBlock,
+        PhoneBlock,
       }}
     >
       <AppShell header={{ height: 60 }} navbar={{ width: 300, breakpoint: 'sm' }}>

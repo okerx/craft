@@ -11,9 +11,9 @@ export const BlockSettings = () => {
     if (currentNodeId) {
       selected = {
         id: currentNodeId,
-        name: state.nodes[currentNodeId].data.name,
+        name: state.nodes[currentNodeId].data.custom.displayName || state.nodes[currentNodeId].data.displayName,
         settings: state.nodes[currentNodeId].related && state.nodes?.[currentNodeId]?.related?.settings,
-        isDeletable: query.node(currentNodeId).isDeletable(),
+        isDeletable: !state.nodes[currentNodeId].data.custom.isEssential && query.node(currentNodeId).isDeletable(),
       };
     }
 
@@ -22,7 +22,7 @@ export const BlockSettings = () => {
       isEnabled: state.options.enabled,
       root: {
         id: state.nodes.ROOT_NODE,
-        name: state.nodes?.[ROOT_NODE]?.data?.name,
+        name: state.nodes[ROOT_NODE]?.data.custom.displayName || state.nodes[ROOT_NODE]?.data.displayName,
         settings: state.nodes[ROOT_NODE]?.related?.settings,
         isDeletable: false,
       },

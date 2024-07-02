@@ -11,7 +11,7 @@ export const OverlayBlock: WithCraft<React.FC<BaseOverlayProps>, BaseOverlayProp
   } = useNode();
   const { isSelected } = useEditor((state) => ({ isSelected: state.events.selected.has(id) }));
 
-  return <BaseOverlay ref={(ref) => ref && connect(drag(ref))} {...props} selected={isSelected} />;
+  return <BaseOverlay ref={(ref) => ref && connect(drag(ref))} {...props} selected={isSelected} data-node-id={id} />;
 };
 
 export const OverlayBlockSettings = () => {
@@ -46,6 +46,8 @@ export const OverlayBlockSettings = () => {
 };
 
 OverlayBlock.craft = {
+  displayName: 'Overlay',
+  custom: { isEssential: true },
   props: {
     backgroundColor: '#000000',
     backgroundOpacity: 0.5,

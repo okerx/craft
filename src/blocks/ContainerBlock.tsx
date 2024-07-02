@@ -19,6 +19,7 @@ export const ContainerBlock: WithCraft<React.FC<BaseContainerProps>, BaseContain
       {...props}
       style={{ ...defaults, ...props.style }}
       selected={isSelected}
+      data-node-id={id}
     />
   );
 };
@@ -110,6 +111,7 @@ const ContainerBlockSettings = () => {
 };
 
 ContainerBlock.craft = {
+  displayName: 'Container',
   props: {
     direction: 'row',
     spacing: '10px',

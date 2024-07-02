@@ -11,7 +11,7 @@ export const PhoneBlock: WithCraft<React.FC<BasePhoneProps>, BasePhoneProps> = (
   } = useNode();
   const { isSelected } = useEditor((state) => ({ isSelected: state.events.selected.has(id) }));
 
-  return <BasePhone ref={(ref) => ref && connect(drag(ref))} {...props} selected={isSelected} />;
+  return <BasePhone ref={(ref) => ref && connect(drag(ref))} {...props} selected={isSelected} data-node-id={id} />;
 };
 
 export const PhoneBlockSettings = () => {
@@ -65,6 +65,7 @@ export const PhoneBlockSettings = () => {
 };
 
 PhoneBlock.craft = {
+  displayName: 'Phone',
   props: {
     placeholder: 'Phone',
     borderRadius: '4px',
