@@ -1,6 +1,4 @@
 import React, { forwardRef } from 'react';
-import { PhoneInputRefType } from 'react-international-phone';
-import 'react-international-phone/style.css';
 import { BaseInput, BaseInputProps } from '../input';
 
 export type BasePhoneProps = BaseInputProps & {
@@ -16,7 +14,7 @@ export type BasePhoneProps = BaseInputProps & {
   countrySelectorBackgroundColorHover?: string;
 };
 
-export const BasePhone = forwardRef<PhoneInputRefType, BasePhoneProps>(({ ...props }, ref) => {
+export const BasePhone = forwardRef<HTMLInputElement, BasePhoneProps>(({ ...props }, ref) => {
   return (
     <BaseInput
       ref={ref}
