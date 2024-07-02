@@ -7,11 +7,12 @@ export interface BaseButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEl
   borderRadius?: string;
   borderColor?: string;
   backgroundColor?: string;
+  textColor?: string;
   fullWidth?: boolean;
 }
 
 export const BaseButton = forwardRef<HTMLButtonElement, BaseButtonProps>(
-  ({ selected, borderRadius, borderColor, fullWidth, backgroundColor, text, ...props }, ref) => {
+  ({ selected, borderRadius, borderColor, fullWidth, textColor, backgroundColor, text, ...props }, ref) => {
     const defaultClassNames = [classes.button, props.className || ''];
     const className = selected ? [...defaultClassNames, classes.selected].join(' ') : defaultClassNames.join(' ');
     return (
@@ -19,7 +20,14 @@ export const BaseButton = forwardRef<HTMLButtonElement, BaseButtonProps>(
         ref={ref}
         {...props}
         className={className}
-        style={{ borderRadius, borderColor, backgroundColor, width: fullWidth ? '100%' : 'auto', ...props.style }}
+        style={{
+          borderRadius,
+          borderColor,
+          backgroundColor,
+          color: textColor,
+          width: fullWidth ? '100%' : 'auto',
+          ...props.style,
+        }}
       >
         {text}
       </button>

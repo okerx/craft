@@ -40,7 +40,7 @@ const ButtonBlockSettings = () => {
       />
       <NumberInput
         label="Border radius"
-        value={props.borderRadius}
+        value={parseInt(props.borderRadius || '0', 10)}
         suffix="px"
         onChange={(e) => {
           setProp((props: BaseButtonProps) => (props.borderRadius = `${e}px`));
@@ -60,6 +60,13 @@ const ButtonBlockSettings = () => {
           setProp((props: BaseButtonProps) => (props.backgroundColor = value));
         }}
       />
+      <ColorInput
+        label="Text color"
+        value={props.textColor}
+        onChange={(value) => {
+          setProp((props: BaseButtonProps) => (props.textColor = value));
+        }}
+      />
     </Stack>
   );
 };
@@ -72,6 +79,7 @@ ButtonBlock.craft = {
     borderRadius: '0px',
     borderColor: '#000000',
     backgroundColor: '#FFFFFF',
+    textColor: '#000000',
   },
   related: {
     settings: ButtonBlockSettings,

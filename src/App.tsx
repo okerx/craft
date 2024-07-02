@@ -57,7 +57,15 @@ export default function App() {
               <Frame>
                 <OverlayBlock backgroundColor="#000000" backgroundOpacity={0.5}>
                   <Element canvas is={ModalBlock}>
-                    <TextBlock text="Hello, World!" />
+                    <Element canvas is={ContainerBlock}>
+                      <Element canvas is={ContainerBlock} direction="column" spacing="20px">
+                        <TextBlock text="Louis Vuitton" fontSize="20px" fontWeight="Bold" />
+                        <TextBlock text="Subscribe to get 10% off on Tyler's men's collection" fontSize="16px" />
+                        <EmailBlock />
+                        <ButtonBlock text="Subscribe" textColor="#FFFFFF" backgroundColor="#000000" />
+                      </Element>
+                      <ImageBlock src="https://assets.vogue.com/photos/65fb1336eebf646a3a39f799/master/w_2240,c_limit/MEN_PRECOFW24_SPRING_VISUAL_CAMPAIGN_FINAL_PLANE_1.jpg" />
+                    </Element>
                   </Element>
                 </OverlayBlock>
               </Frame>
