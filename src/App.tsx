@@ -66,7 +66,7 @@ export default function App() {
                         <EmailBlock />
                         <ButtonBlock text="Subscribe" textColor="#FFFFFF" backgroundColor="#000000" />
                       </Element>
-                      <ImageBlock src="https://assets.vogue.com/photos/65fb1336eebf646a3a39f799/master/w_2240,c_limit/MEN_PRECOFW24_SPRING_VISUAL_CAMPAIGN_FINAL_PLANE_1.jpg" />
+                      <ImageBlock src="https://fuckingyoung.es/wp-content/uploads/2024/07/1_lv-fw24-campaign_fy.jpg" />
                     </Element>
                   </Element>
                 </OverlayBlock>
