@@ -61,7 +61,7 @@ const ImageBlockSettings = () => {
 ImageBlock.craft = {
   displayName: 'Image',
   props: {
-    src: 'https://placehold.co/600x400/a1a1a1/31343C',
+    src: 'https://fuckingyoung.es/wp-content/uploads/2024/07/1_lv-fw24-campaign_fy.jpg',
     alt: 'Image',
     fullWidth: false,
     borderRadius: '0px',
