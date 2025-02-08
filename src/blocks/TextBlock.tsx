@@ -7,13 +7,22 @@ import { NumberInput, Select, Stack, TextInput } from '@mantine/core';
 export const TextBlock: WithCraft<React.FC<PropsWithChildren<BaseTextProps>>, BaseTextProps> = (props) => {
   const {
     id,
-    connectors: { connect, drag },
+    connectors: { connect },
   } = useNode();
   const { isSelected } = useEditor((state) => ({
     isSelected: state.events.selected.has(id),
   }));
 
-  return <BaseText ref={(ref) => ref && connect(drag(ref))} {...props} selected={isSelected} data-node-id={id} />;
+  return (
+    <BaseText
+      ref={(ref) => {
+        if (ref) connect(ref);
+      }}
+      {...props}
+      selected={isSelected}
+      data-node-id={id}
+    />
+  );
 };
 
 export const TextSettings = () => {

@@ -7,11 +7,20 @@ import { NumberInput, Stack, Switch, TextInput } from '@mantine/core';
 export const ImageBlock: WithCraft<React.FC<BaseImageProps>, BaseImageProps> = (props) => {
   const {
     id,
-    connectors: { connect, drag },
+    connectors: { connect },
   } = useNode();
   const { isSelected } = useEditor((state) => ({ isSelected: state.events.selected.has(id) }));
 
-  return <BaseImage ref={(ref) => ref && connect(drag(ref))} {...props} selected={isSelected} data-node-id={id} />;
+  return (
+    <BaseImage
+      ref={(ref) => {
+        if (ref) connect(ref);
+      }}
+      {...props}
+      selected={isSelected}
+      data-node-id={id}
+    />
+  );
 };
 
 const ImageBlockSettings = () => {

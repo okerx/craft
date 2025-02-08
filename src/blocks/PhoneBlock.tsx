@@ -7,11 +7,20 @@ import { ColorInput, NumberInput, Stack, Switch, TextInput } from '@mantine/core
 export const PhoneBlock: WithCraft<React.FC<BasePhoneProps>, BasePhoneProps> = (props) => {
   const {
     id,
-    connectors: { connect, drag },
+    connectors: { connect },
   } = useNode();
   const { isSelected } = useEditor((state) => ({ isSelected: state.events.selected.has(id) }));
 
-  return <BasePhone ref={(ref) => ref && connect(drag(ref))} {...props} selected={isSelected} data-node-id={id} />;
+  return (
+    <BasePhone
+      ref={(ref) => {
+        if (ref) connect(ref);
+      }}
+      {...props}
+      selected={isSelected}
+      data-node-id={id}
+    />
+  );
 };
 
 export const PhoneBlockSettings = () => {

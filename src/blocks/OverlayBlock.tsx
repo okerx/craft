@@ -7,11 +7,20 @@ import { ColorInput, NumberInput, Stack } from '@mantine/core';
 export const OverlayBlock: WithCraft<React.FC<BaseOverlayProps>, BaseOverlayProps> = (props) => {
   const {
     id,
-    connectors: { connect, drag },
+    connectors: { connect },
   } = useNode();
   const { isSelected } = useEditor((state) => ({ isSelected: state.events.selected.has(id) }));
 
-  return <BaseOverlay ref={(ref) => ref && connect(drag(ref))} {...props} selected={isSelected} data-node-id={id} />;
+  return (
+    <BaseOverlay
+      ref={(ref) => {
+        if (ref) connect(ref);
+      }}
+      {...props}
+      selected={isSelected}
+      data-node-id={id}
+    />
+  );
 };
 
 export const OverlayBlockSettings = () => {

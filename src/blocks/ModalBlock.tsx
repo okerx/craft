@@ -7,7 +7,7 @@ import { BaseModal, BaseModalProps } from '../base';
 export const ModalBlock: WithCraft<React.FC<BaseModalProps>, BaseModalProps> = (props) => {
   const {
     id,
-    connectors: { connect, drag },
+    connectors: { connect },
   } = useNode();
   const { isSelected } = useEditor((state) => ({ isSelected: state.events.selected.has(id) }));
 
@@ -16,7 +16,9 @@ export const ModalBlock: WithCraft<React.FC<BaseModalProps>, BaseModalProps> = (
   return (
     <BaseModal
       style={{ minHeight }}
-      ref={(ref) => ref && connect(drag(ref))}
+      ref={(ref) => {
+        if (ref) connect(ref);
+      }}
       {...props}
       selected={isSelected}
       data-node-id={id}

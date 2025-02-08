@@ -7,7 +7,7 @@ import { ColorInput, NumberInput, SegmentedControl, Select, Stack, Switch, Text 
 export const ContainerBlock: WithCraft<React.FC<BaseContainerProps>, BaseContainerProps> = (props) => {
   const {
     id,
-    connectors: { connect, drag },
+    connectors: { connect },
   } = useNode();
   const { isSelected } = useEditor((state) => ({ isSelected: state.events.selected.has(id) }));
 
@@ -15,7 +15,9 @@ export const ContainerBlock: WithCraft<React.FC<BaseContainerProps>, BaseContain
 
   return (
     <BaseContainer
-      ref={(ref) => ref && connect(drag(ref))}
+      ref={(ref) => {
+        if (ref) connect(ref);
+      }}
       {...props}
       style={{ ...defaults, ...props.style }}
       selected={isSelected}

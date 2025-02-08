@@ -7,11 +7,20 @@ import { ColorInput, NumberInput, Stack, Switch, TextInput } from '@mantine/core
 export const ButtonBlock: WithCraft<React.FC<BaseButtonProps>, BaseButtonProps> = (props) => {
   const {
     id,
-    connectors: { connect, drag },
+    connectors: { connect },
   } = useNode();
   const { isSelected } = useEditor((state) => ({ isSelected: state.events.selected.has(id) }));
 
-  return <BaseButton ref={(ref) => ref && connect(drag(ref))} {...props} selected={isSelected} data-node-id={id} />;
+  return (
+    <BaseButton
+      ref={(ref) => {
+        if (ref) connect(ref);
+      }}
+      {...props}
+      selected={isSelected}
+      data-node-id={id}
+    />
+  );
 };
 
 const ButtonBlockSettings = () => {

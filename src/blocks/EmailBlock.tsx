@@ -7,11 +7,20 @@ import { ColorInput, NumberInput, Stack, Switch, TextInput } from '@mantine/core
 export const EmailBlock: WithCraft<React.FC<BaseEmailProps>, BaseEmailProps> = (props) => {
   const {
     id,
-    connectors: { connect, drag },
+    connectors: { connect },
   } = useNode();
   const { isSelected } = useEditor((state) => ({ isSelected: state.events.selected.has(id) }));
 
-  return <BaseEmail ref={(ref) => ref && connect(drag(ref))} {...props} selected={isSelected} data-node-id={id} />;
+  return (
+    <BaseEmail
+      ref={(ref) => {
+        if (ref) connect(ref);
+      }}
+      {...props}
+      selected={isSelected}
+      data-node-id={id}
+    />
+  );
 };
 
 export const EmailBlockSettings = () => {

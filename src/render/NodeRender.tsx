@@ -2,30 +2,31 @@ import React, { useEffect, useRef, useState } from 'react';
 import { ROOT_NODE, useEditor, useNode } from '@craftjs/core';
 import { createPortal } from 'react-dom';
 import { ActionIcon, Group, Text } from '@mantine/core';
-import { IconArrowUp, IconTrash } from '@tabler/icons-react';
+import { IconArrowsMove, IconArrowUp, IconTrash } from '@tabler/icons-react';
 
 export const NodeRender = ({ render }: { render: React.ReactNode }) => {
   const { id } = useNode();
   const { actions, query, isActive } = useEditor((_, query) => ({
     isActive: query.getEvent('selected').contains(id),
   }));
-  const { name, parent, deletable } = useNode((node) => ({
+  const { name, parent, deletable, moveable, connectors } = useNode((node) => ({
     name: node.data.custom.displayName || node.data.displayName,
     parent: node.data.parent,
     deletable: !node.data.custom.isEssential && query.node(node.id).isDeletable(),
+    moveable: query.node(node.id).isDraggable(),
   }));
-
+  const targetElRef = useRef<HTMLElement | null>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
   const rafRef = useRef<number | null>(null);
   const [position, setPosition] = useState({ top: 0, left: 0 });
 
-  const targetEl = document.querySelector(`[data-node-id="${id}"]`);
-
   useEffect(() => {
-    if (!targetEl) return;
+    targetElRef.current = document.querySelector(`[data-node-id="${id}"]`);
+    if (!targetElRef.current) return;
 
     const updatePosition = () => {
-      const rect = targetEl.getBoundingClientRect();
+      const rect = targetElRef.current?.getBoundingClientRect();
+      if (!rect) return;
       setPosition({ top: rect.top + window.scrollY, left: rect.left + window.scrollX });
     };
 
@@ -45,7 +46,7 @@ export const NodeRender = ({ render }: { render: React.ReactNode }) => {
       { threshold: 0.1 },
     );
 
-    observerRef.current?.observe(targetEl);
+    observerRef.current?.observe(targetElRef.current);
 
     window.addEventListener('scroll', updatePosition);
     window.addEventListener('resize', updatePosition);
@@ -60,9 +61,9 @@ export const NodeRender = ({ render }: { render: React.ReactNode }) => {
       window.removeEventListener('scroll', updatePosition);
       window.removeEventListener('resize', updatePosition);
     };
-  }, [targetEl]);
+  }, [id]);
 
-  if (!targetEl || id === 'ROOT' || !isActive) return render;
+  if (!targetElRef.current || id === 'ROOT' || !isActive) return render;
 
   const portal = createPortal(
     <Group
@@ -78,6 +79,17 @@ export const NodeRender = ({ render }: { render: React.ReactNode }) => {
       <Text size="xs" c="white">
         {name}
       </Text>
+      {moveable && (
+        <ActionIcon
+          size="xs"
+          ref={(ref) => {
+            if (ref) connectors.drag(ref);
+          }}
+          style={{ cursor: 'move' }}
+        >
+          <IconArrowsMove />
+        </ActionIcon>
+      )}
       {id !== ROOT_NODE && (
         <ActionIcon size="xs" onClick={() => parent && actions.selectNode(parent)}>
           <IconArrowUp />
